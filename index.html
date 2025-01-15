@@ -116,6 +116,13 @@
         
         <div class="add-task">
             <input type="text" id="taskInput" placeholder="Enter a new task">
+<!-- Add a category selection input -->
+            <label for="categoryInput">Category:</label>
+            <select id="categoryInput">
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="other">Other</option>
+            </select>
             <button id="addButton">Add Task</button>
         </div>
 
@@ -140,17 +147,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let tasks = [
-                { id: 1, title: 'Learn Git Basics', status: 'todo' },
-                { id: 2, title: 'Create First PR', status: 'in-progress' },
-                { id: 3, title: 'Review Code', status: 'done' },
-                { id: 4, title: 'Abdulsalam Baruwa', status: 'done' }
+                { id: 1, title: 'Learn Git Basics', status: 'todo', category: 'work' },
+                { id: 2, title: 'Create First PR', status: 'in-progress', category: 'work' },
+                { id: 3, title: 'Review Code', status: 'done', category: 'work' },
+                { id: 4, title: 'Abdulsalam Baruwa', status: 'done', category: 'other' }
             ];
 
             function createTaskElement(task) {
                 const taskDiv = document.createElement('div');
                 taskDiv.className = 'task';
                 taskDiv.innerHTML = `
-                    <span>${task.title}</span>
+                    <span>${task.title} (${task.category})</span>
                     <div>
                         <select onchange="moveTask(${task.id}, this.value)">
                             <option value="todo" ${task.status === 'todo' ? 'selected' : ''}>To Do</option>
@@ -191,7 +198,10 @@
             // Add task event listener
             document.getElementById('addButton').addEventListener('click', function() {
                 const input = document.getElementById('taskInput');
+                const categoryInput = document.getElementById('categoryInput');
                 const title = input.value.trim();
+                const category = categoryInput.value;
+
                 
                 if (title) {
                     const newTask = {
