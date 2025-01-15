@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -207,7 +207,8 @@
                     const newTask = {
                         id: tasks.length + 1,
                         title: title,
-                        status: 'todo'
+                        status: 'todo',
+                        category: category
                     };
                     tasks.push(newTask);
                     input.value = '';
